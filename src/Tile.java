@@ -36,7 +36,7 @@ public class Tile {
         return isEmpty;
     }
 
-    public void setEmpty() {
-        isEmpty = true;
+    public void setEmpty(boolean bool) {
+        isEmpty = bool;
     }
 }
