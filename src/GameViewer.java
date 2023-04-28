@@ -2,7 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;             // #1: Required for KeyListener
 import java.awt.event.KeyListener;          // #2: Required for KeyListener
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class GameViewer extends JFrame implements KeyListener {
     // private Image[] tiles;
@@ -10,9 +11,11 @@ public class GameViewer extends JFrame implements KeyListener {
     private final int WINDOW_HEIGHT = 800;
     private Game game;
     private Board board;
+    private Image grid;
 
     public GameViewer(Game game) {
         // Instantiating Images
+        grid = new ImageIcon("Resources/grid.png").getImage();
 
         // Passes through the game to get the board
         this.game = game;
@@ -26,7 +29,7 @@ public class GameViewer extends JFrame implements KeyListener {
 
         // The addKeyListener method attaches to this KeyListener object
         // an object that implements the KeyListener interface (i.e. supplies the keyTyped, keyReleased, and keyPressed methods)
-        // By passsing the parameter "this"
+        // By passing the parameter "this"
         // we are saying that this specific KeyListenerDemo object
         // supplies its own KeyListener functionality (contains the 3 required KeyListener methods).
         addKeyListener(this);               // #4 Required for KeyListener
@@ -34,12 +37,23 @@ public class GameViewer extends JFrame implements KeyListener {
         setVisible(true);
     }
 
-    //public Image[] getImages() { return diceImages; }
-
     public void paint(Graphics g) {
-       /* // Draw setup / board
-        g.drawImage(board,0, 0, 1000, 800, this);
+        // Draw setup / board
 
+        g.drawImage(grid,185, 130, 600, 600, this);
+
+        g.setColor(Color.LIGHT_GRAY);
+        g.setFont(new Font("SansSerif", Font.BOLD, 75));
+        g.drawString("2048", 190, 120);
+
+        // Iterates through all the tiles in a nested for loop so that each tile
+        // can individually draw itself.
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                board.getTile(i, j).draw(g, this);
+            }
+        }
+        /*
         // Draw hand over the dice on computer dice until unveils after guess
         // and draw's player's dice
         if (!tester.isRevealComp()) {
