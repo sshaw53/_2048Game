@@ -12,6 +12,7 @@ public class GameViewer extends JFrame implements KeyListener {
     private Game game;
     private Board board;
     private Image grid;
+    private Color[] colors = {new Color(204, 229, 255), new Color(153, 204, 255), new Color(102, 178, 255), new Color(51, 153, 255), new Color(0, 128, 255), new Color(0, 102, 204), new Color(0, 76, 153), new Color(255, 153, 255), new Color(255, 102, 255), new Color(255, 51, 255), new Color(0, 255, 128)};
 
     public GameViewer(Game game) {
         // Instantiating Images
@@ -44,13 +45,13 @@ public class GameViewer extends JFrame implements KeyListener {
 
         g.setColor(Color.LIGHT_GRAY);
         g.setFont(new Font("SansSerif", Font.BOLD, 75));
-        g.drawString("2048", 190, 120);
+        g.drawString("2048", 120, 120);
 
         // Iterates through all the tiles in a nested for loop so that each tile
         // can individually draw itself.
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                board.getTile(i, j).draw(g, this);
+                board.getTile(i, j).draw(g, this, colors);
             }
         }
         /*
@@ -115,6 +116,7 @@ public class GameViewer extends JFrame implements KeyListener {
         }
 
         game.printBoard();
+        repaint();
     }
 
     @Override
