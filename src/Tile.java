@@ -12,9 +12,9 @@ public class Tile {
         isEmpty = true;
     }
 
-    public Tile (int value) {
+    public Tile (int value, boolean isEmpty) {
         this.value = value;
-        isEmpty = false;
+        this.isEmpty = isEmpty;
     }
 
     public int getValue() {
@@ -48,6 +48,22 @@ public class Tile {
         // and based on its index in the array
         int xLoc = 205 + 145 * x;
         int yLoc = 150 + 135 * y;
+        int size = 50;
+
+        int stringXLoc = xLoc;
+
+        if (value > 1000) {
+            stringXLoc -= 30;
+            size = 30;
+        }
+        else if (value > 100) {
+            stringXLoc -= 20;
+            size = 35;
+        }
+        else if (value > 10) {
+            stringXLoc -= 10;
+            size = 40;
+        }
 
         // Checking to make sure that the tile isn't empty - if the tile is empty it should not
         // draw anything, but if it isn't, it should draw the tile with its distinct value and color
@@ -57,9 +73,8 @@ public class Tile {
             g.fillRect(xLoc, yLoc, 120, 120);
 
             g.setColor(Color.white);
-            g.setFont(new Font("SansSerif", Font.BOLD, 50));
-            g.drawString(String.valueOf(value), xLoc + 40, yLoc + 70);
+            g.setFont(new Font("SansSerif", Font.BOLD, size));
+            g.drawString(String.valueOf(value), stringXLoc + 40, yLoc + 70);
         }
-        // g.drawImage(number[num - 1],xLoc, yLoc, 150, 150, viewer);
     }
 }

@@ -39,13 +39,23 @@ public class GameViewer extends JFrame implements KeyListener {
     }
 
     public void paint(Graphics g) {
-        // Draw setup / board
+        // Clears screen
+        g.setColor(Color.white);
+        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        // Draw setup / board with game header and score
 
         g.drawImage(grid,185, 130, 600, 600, this);
 
         g.setColor(Color.LIGHT_GRAY);
         g.setFont(new Font("SansSerif", Font.BOLD, 75));
-        g.drawString("2048", 120, 120);
+        g.drawString("2048", 190, 120);
+
+        g.setFont(new Font("SansSerif", Font.BOLD, 25));
+        g.drawString("SCORE: " + String.valueOf(game.getScore()), 650, 120);
+
+        g.setFont(new Font("SansSerif", Font.BOLD, 20));
+        g.drawString("HIGH SCORE: " + String.valueOf(game.getHighScore()), 190, 725);
 
         // Iterates through all the tiles in a nested for loop so that each tile
         // can individually draw itself.
@@ -54,25 +64,9 @@ public class GameViewer extends JFrame implements KeyListener {
                 board.getTile(i, j).draw(g, this, colors);
             }
         }
+
+        Toolkit.getDefaultToolkit().sync();
         /*
-        // Draw hand over the dice on computer dice until unveils after guess
-        // and draw's player's dice
-        if (!tester.isRevealComp()) {
-            for (int i = 0; i < 5; i++) {
-                playersDice[i].draw(g, i, 1, this);
-            }
-            g.drawImage(hand,0, 50, 1000, 200, this);
-        }
-
-        // Draws all dice - for loop for the items in players dice and computers dice arrays
-        // (once revealed to show computer's rolls)
-        if (tester.isRevealComp()) {
-            for (int i = 0; i < 5; i++) {
-                playersDice[i].draw(g, i, 1, this);
-                computersDice[i].draw(g, i, 2, this);
-            }
-        }
-
         // Display winning message
         g.setColor(Color.PINK);
         g.setFont(new Font("Serif", Font.PLAIN, 100));
