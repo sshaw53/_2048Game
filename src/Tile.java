@@ -1,3 +1,7 @@
+// 2048 Game
+// Created by: Sierra Shaw
+// May 11, 2023
+
 import java.awt.*;
 
 public class Tile {
@@ -35,12 +39,24 @@ public class Tile {
         // or like this.y += changeY
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public boolean isEmpty() {
         return isEmpty;
     }
 
     public void setEmpty(boolean bool) {
         isEmpty = bool;
+    }
+
+    public boolean isSameTile(Tile other) {
+        return (this.isEmpty == other.isEmpty() && this.value == other.getValue() && this.x == other.getX() && this.y == other.getY());
     }
 
     public void draw(Graphics g, GameViewer viewer, Color[] colors) {

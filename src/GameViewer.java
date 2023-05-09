@@ -1,3 +1,7 @@
+// 2048 Game
+// Created by: Sierra Shaw
+// May 11, 2023
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;             // #1: Required for KeyListener
@@ -6,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameViewer extends JFrame implements KeyListener {
-    // private Image[] tiles;
     private final int WINDOW_WIDTH = 1000;
     private final int WINDOW_HEIGHT = 800;
     private Game game;
@@ -55,7 +58,7 @@ public class GameViewer extends JFrame implements KeyListener {
         g.drawString("SCORE: " + String.valueOf(game.getScore()), 650, 120);
 
         g.setFont(new Font("SansSerif", Font.BOLD, 20));
-        g.drawString("HIGH SCORE: " + String.valueOf(game.getHighScore()), 190, 725);
+        g.drawString("press 'U' key to undo your move", 190, 725);
 
         // Iterates through all the tiles in a nested for loop so that each tile
         // can individually draw itself.
@@ -65,21 +68,20 @@ public class GameViewer extends JFrame implements KeyListener {
             }
         }
 
-        Toolkit.getDefaultToolkit().sync();
-        /*
         // Display winning message
         g.setColor(Color.PINK);
-        g.setFont(new Font("Serif", Font.PLAIN, 100));
-        if (tester.isGameOver()) {
-            if (tester.isHasWon()) {
-                g.drawString("YOU WIN!", 280, 400);
+        g.setFont(new Font("Serif", Font.PLAIN, 70));
+        if (game.isGameOver()) {
+            if (game.hasWon()) {
+                g.drawString("YOU WIN!", 190, 725);
             }
-            if (tester.isHasLost()) {
-                g.drawString("YOU LOSE :(", 260, 400);
+            else {
+                g.drawString("YOU LOSE :(", 190, 725);
             }
         }
 
-        */
+        // Minimizes flickering visual
+        Toolkit.getDefaultToolkit().sync();
     }
 
     @Override
@@ -107,6 +109,10 @@ public class GameViewer extends JFrame implements KeyListener {
         else if(keyCode == KeyEvent.VK_DOWN)
         {
             game.moveDown();
+        }
+        else if(keyCode == KeyEvent.VK_U)
+        {
+            board.undo();
         }
 
         game.printBoard();
