@@ -70,14 +70,14 @@ public class GameViewer extends JFrame implements KeyListener {
 
         // Display winning message
         g.setColor(Color.PINK);
-        g.setFont(new Font("Serif", Font.PLAIN, 70));
+        g.setFont(new Font("SansSerif", Font.PLAIN, 70));
         if (game.isGameOver()) {
-            if (game.hasWon()) {
-                g.drawString("YOU WIN!", 190, 725);
-            }
-            else {
-                g.drawString("YOU LOSE :(", 190, 725);
-            }
+            g.fillRoundRect(170, 350, 625, 100, 50, 50);
+            g.setColor(Color.WHITE);
+            if (game.hasWon())
+                g.drawString("YOU WIN!!!", 275, 425);
+            else
+                g.drawString("YOU LOSE :(", 275, 425);
         }
 
         // Minimizes flickering visual
@@ -112,7 +112,8 @@ public class GameViewer extends JFrame implements KeyListener {
         }
         else if(keyCode == KeyEvent.VK_U)
         {
-            board.undo();
+            if (!game.isGameOver())
+                board.undo();
         }
 
         game.printBoard();
