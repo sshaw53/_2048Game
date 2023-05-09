@@ -96,19 +96,23 @@ public class GameViewer extends JFrame implements KeyListener {
 
         if(keyCode == KeyEvent.VK_LEFT)
         {
-            game.moveLeft();
+            if (!game.isGameOver())
+                game.moveLeft();
         }
         else if(keyCode == KeyEvent.VK_RIGHT)
         {
-            game.moveRight();
+            if (!game.isGameOver())
+                game.moveRight();
         }
         else if(keyCode == KeyEvent.VK_UP)
         {
-            game.moveUp();
+            if (!game.isGameOver())
+                game.moveUp();
         }
         else if(keyCode == KeyEvent.VK_DOWN)
         {
-            game.moveDown();
+            if (!game.isGameOver())
+                game.moveDown();
         }
         else if(keyCode == KeyEvent.VK_U)
         {
